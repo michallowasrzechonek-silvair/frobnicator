@@ -4,7 +4,9 @@
 Bo pisanie testów jest nudne, uruchamiają się wolno, trzeba spędzać czas na
 przygotowaniu raportów, wykresów itp.
 
-Im więcej zrobi za nas automat, tym lepiej.
+W pythonie jest wbudowany framework oparty o klasy, `unittest`, ale moim
+zdaniem pytest jest wygodniejszy i postaram się opowiedzieć dlaczego.
+
 
 1. Wyszukiwanie testów
 
@@ -12,7 +14,10 @@ Im więcej zrobi za nas automat, tym lepiej.
  - funkcje nazwane `test_*`
  - klasy nazwane `Test*` i ich metody `test_*`
 
-Nie ma znaczenia gdzie to wszystko leży.
+Nie ma znaczenia gdzie to wszystko leży. Są dwie główne konwencje: albo osobny
+katalog tests/, albo pliki `foo_test.py` obok modułu `foo.py`.
+
+W Silvair preferujemy dedykowany katalog.
 
 2. Asercje
 
@@ -116,6 +121,8 @@ def no_requests(monkeypatch):
 
 W `unittest` jest przydatna klasa `MagicMock` która automatycznie mockuje prawie wszystko:
 
+Also, `pip install pytest-mock`
+
 ```python3
 @pytest.fixture
 def mock_requests(monkeypatch):
@@ -143,44 +150,6 @@ zwinąć - zwracam uwagę na binding argumentów funkcji testowej *po nazwie*:
 )
 def test_swapcase(input, output):
     assert input.swapcase() == output
-```
-
-8. Przesłanianie fixtur
-
-Co się stanie gdy zrobimy tak:
-
-```python3
-@pytest.fixture
-def setup():
-    print("SETUP")
-
-@pytest.mark.parametrize("setup",
-    [
-        pytest.param("override"),
-    ]
-)
-def test_foo(setup):
-    pass
-```
-
-To czasem jest dobre, a czasem nie. Czy da się zrobić fixturę która będzie
-przyjmować różne "opcje" podane przez test?
-
-```python3
-@pytest.fixture
-def mock_requests(request, monkeypatch):
-    request = MagicMock(return_value=MagicMock(text=request.param)
-    monkeypatch.setattr("requests.api.request", request)
-    return request
-
-@pytest.mark.parametrize("mock_requests",
-    [
-        pytest.param("bar"),
-    ],
-    indirect=["mock_requests"]
-)
-def test_frobnicate(mock_requests):
-    assert frob.frobnicate() == "bar"
 ```
 
 
