@@ -24,24 +24,23 @@ W Silvair preferujemy dedykowany katalog.
 Pytest *nie uruchamia kodu wprost*.
 
 Zamiast tego, ładuje znalezione moduły jako
-[https://docs.python.org/3/library/ast.html](AST), następnie wykonuje na nich
+[AST](https://docs.python.org/3/library/ast.html), następnie wykonuje na nich
 _magiczne_ transformacje i odpala dopiero zmodyfikowany kod.
 
 Główna transformacja to tzw "assertion rewriting", dzięki której nie trzeba
 używać specjalnych funkcji typu
-[https://docs.python.org/3/library/unittest.html#unittest.TestCase.assertEqual](unittest.TestCase.assertEqual),
+[unittest.TestCase.assertEqual](https://docs.python.org/3/library/unittest.html#unittest.TestCase.assertEqual)
 a nieprzechodzące asercje raportują znacznie więcej informacji niż tylko
 `AssertionError`
 
 Można też dodawać swoje własne
-[https://docs.pytest.org/en/7.1.x/how-to/assert.html#defining-your-own-explanation-for-failed-assertions](szczegóły
-błędów)
+[szczegóły błędów](https://docs.pytest.org/en/7.1.x/how-to/assert.html#defining-your-own-explanation-for-failed-assertions)
 
 Lektura do poduszki:
-- [https://www.pythoninsight.com/2018/01/assertion-rewriting-in-pytest-part-1](Assertion rewriting in Pytest #1)
-- [https://www.pythoninsight.com/2018/02/assertion-rewriting-in-pytest-part-2-simple-workarounds](Assertion rewriting in Pytest #2 - simple workarounds)
-- [https://www.pythoninsight.com/2018/02/assertion-rewriting-in-pytest-part-3-the-ast](Assertion rewriting in Pytest #3 - the AST)
-- [https://www.pythoninsight.com/2018/02/assertion-rewriting-in-pytest-part-4-the-implementation](Assertion rewriting in Pytest #4 - the implementation)
+- [Assertion rewriting in Pytest #1](https://www.pythoninsight.com/2018/01/assertion-rewriting-in-pytest-part-1)
+- [Assertion rewriting in Pytest #2 - simple workarounds](https://www.pythoninsight.com/2018/02/assertion-rewriting-in-pytest-part-2-simple-workarounds)
+- [Assertion rewriting in Pytest #3 - the AST](https://www.pythoninsight.com/2018/02/assertion-rewriting-in-pytest-part-3-the-ast)
+- [Assertion rewriting in Pytest #4 - the implementation](https://www.pythoninsight.com/2018/02/assertion-rewriting-in-pytest-part-4-the-implementation)
 
 3. Setup/teardown
 
@@ -102,9 +101,8 @@ Czemu magicznie jest niedobrze?
 Python jest językiem z plasteliny i pozwala modyfikować kod w runtime.
 
 Nie trzeba refaktoryzować kodu żeby umożliwić
-[https://en.wikipedia.org/wiki/Dependency_injection](dependency injection) -
-zamiast tego używamy [https://en.wikipedia.org/wiki/Monkey_patch](monkey
-patching).
+[dependency injection](https://en.wikipedia.org/wiki/Dependency_injection) -
+zamiast tego używamy [monkey patching](https://en.wikipedia.org/wiki/Monkey_patch).
 
 Pytest ma do tego wbudowany mechanizm, fixturkę `monkeypatch`:
 
